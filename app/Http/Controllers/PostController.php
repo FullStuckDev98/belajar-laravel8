@@ -8,20 +8,20 @@ use App\Models\Post;
 class PostController extends Controller
 {
     public function index(){
-        return view('blog', [
+        return view('posts', [
             "title" => "Blog",
             "posts" => Post::all()
         ]);
     }
 
-    public function show($slug){
+    public function show(Post $post){
         // $new_post = [];
     // foreach($blog_post as $post){
     //     ($post['slug'] === $slug) ? $new_post = $post : [];
     // }
         return view('post',[
-            "title"=> "<Postingan> </Postingan>",
-            "post" =>Post::find($slug)
+            "title"=> "Blog",
+            "post" =>$post
         ]);
     }
 }
