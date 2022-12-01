@@ -13,8 +13,10 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained('categories');
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('excerpt');
