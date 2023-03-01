@@ -32,10 +32,11 @@ Route::get('/about', function () {
 });
 
 
-
+//route menggunakan controller
 Route::get('/blog', [PostController::class, 'index']); 
 
 // halaman single post
+
 
 // Route::get('posts/{post}', [PostController::class, 'show']); //route model binding
 Route::get('posts/{post:slug}', [PostController::class, 'show']); //route model binding
