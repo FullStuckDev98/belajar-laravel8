@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 // menggunakan model
 use App\Models\Category;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,11 +36,21 @@ Route::get('/about', function () {
 //route menggunakan controller
 Route::get('/blog', [PostController::class, 'index']); 
 
+
 // halaman single post
 
-
 // Route::get('posts/{post}', [PostController::class, 'show']); //route model binding
-Route::get('posts/{post:slug}', [PostController::class, 'show']); //route model binding
+Route::get('/posts/{post:slug}', [PostController::class, 'show']); //route model binding
+
+
+
+Route::get('/categories', function(){
+    return view('categories', [
+        'title' => "Post Categories",
+        'categories' => Category::all()
+    ]);
+});
+
 
 /**
  *                            ||              HARUS SAMA          ||
@@ -47,7 +58,7 @@ Route::get('posts/{post:slug}', [PostController::class, 'show']); //route model 
  * Route::get('categories/{category:slug}', function(Category $category){
  * }
  */
-Route::get('categories/{category:slug}', function(Category $category){
+Route::get('/categories/{category:slug}', function(Category $category){
     return view('category', [
         'title' => $category->name,
         'posts' => $category->posts,
@@ -55,9 +66,10 @@ Route::get('categories/{category:slug}', function(Category $category){
     ]);
 });
 
-Route::get('categories', function(){
-    return view('categories', [
-        'title' => "Post Categories",
-        'categories' => Category::all()
+
+Route::get('/authors/{author:username}', function(User $author){
+    return view('posts', [
+        'title' => 'User Posts',
+        'posts' => $author->posts
     ]);
 });
