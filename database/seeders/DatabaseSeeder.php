@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //use facetory
-        User::factory(4)->create();
+        User::factory(3)->create();
         
 
         // User::create([
@@ -34,6 +34,11 @@ class DatabaseSeeder extends Seeder
         Category::create([
             'name' => 'Web Programming',
             'slug' => 'web-programming'
+        ]);
+
+        Category::create([
+            'name' => 'Web Design',
+            'slug' => 'web-design'
         ]);
 
         Post::factory(20)->create();
